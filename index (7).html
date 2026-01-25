@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicky Kuang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500&family=Spectral:wght@300;400;500&family=Lora:wght@400;500&family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F4EFE6;
+            --text: #3A3530;
+            --text-secondary: #6B6560;
+            --accent: #B8E8D8;
+            --accent-dark: #9DD9C9;
+            --border: #D4C9BA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.65;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            animation: pageEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        @keyframes pageEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+            pointer-events: none;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.02;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px);
+        }
+        
+        body * {
+            transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h1 {
+            font-family: 'Tiempos Text', Georgia, serif;
+            font-weight: 600;
+            font-size: 32px;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Tiempos Text', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        li:hover {
+            transform: translateX(2px);
+        }
+
+        li:before {
+            content: "·";
+            position: absolute;
+            left: 6px;
+            color: var(--accent-dark);
+            font-size: 20px;
+            line-height: 1.4;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        li:hover:before {
+            color: var(--accent-dark);
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 1px;
+            display: inline-block;
+            position: relative;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-dark);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Remove underline styling from writing links */
+        [data-essay] {
+            border-bottom: none;
+            cursor: pointer;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-essay]::after {
+            display: none;
+        }
+
+        [data-essay]:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Novel button ideas */
+        .floating-actions {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .action-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background: var(--accent);
+            border: 1px solid var(--accent-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 8px rgba(107, 196, 172, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(107, 196, 172, 0.25);
+            background: var(--accent-dark);
+        }
+
+        .action-btn:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .tooltip {
+            position: absolute;
+            right: 56px;
+            background: var(--text);
+            color: var(--bg);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(4px);
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .action-btn:hover .tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Theme toggle */
+        .theme-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.theme:hover .theme-indicator {
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            --bg: #3D3A36;
+            --text: #F4EFE6;
+            --text-secondary: #BDB5A9;
+            --accent: #7FD4BE;
+            --accent-dark: #A8E6D5;
+            --border: #5C574F;
+        }
+
+        body.dark-mode .theme-indicator {
+            background: var(--accent);
+        }
+
+        /* Reading progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            opacity: 0.8;
+        }
+
+        /* Minimal animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        .subtitle {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards;
+        }
+
+        .section {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+
+        .section:nth-of-type(1) {
+            animation-delay: 0.15s;
+        }
+
+        .section:nth-of-type(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-of-type(3) {
+            animation-delay: 0.25s;
+        }
+
+        .section:nth-of-type(4) {
+            animation-delay: 0.3s;
+        }
+
+        /* Copy email functionality */
+        .email-copied {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            background: var(--text);
+            color: var(--bg);
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-20px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .email-copied.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 32px 16px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .floating-actions {
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        /* Writing preview popup */
+        .writing-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 90%;
+            max-width: 650px;
+            max-height: 75vh;
+            background: #F8F4ED;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.08),
+                0 12px 24px rgba(0, 0, 0, 0.12),
+                0 24px 48px rgba(0, 0, 0, 0.16),
+                inset 0 0 40px rgba(139, 124, 103, 0.06);
+            z-index: 2000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(139, 124, 103, 0.3);
+        }
+
+        .writing-popup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='6' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23F8F4ED' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23paper)' opacity='0.5'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
+            mix-blend-mode: multiply;
+            opacity: 0.9;
+            pointer-events: none;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .writing-popup::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 800px 600px at 20% 30%, rgba(184, 232, 216, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 600px 800px at 80% 70%, rgba(255, 245, 230, 0.15) 0%, transparent 50%),
+                radial-gradient(circle 400px at 50% 50%, rgba(248, 244, 237, 0.3) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 124, 103, 0.015) 2px,
+                    rgba(139, 124, 103, 0.015) 4px
+                ),
+                radial-gradient(circle at 15% 22%, rgba(107, 99, 87, 0.18) 0%, transparent 0.9%),
+                radial-gradient(circle at 42% 18%, rgba(107, 99, 87, 0.15) 0%, transparent 0.7%),
+                radial-gradient(circle at 68% 31%, rgba(107, 99, 87, 0.13) 0%, transparent 0.6%),
+                radial-gradient(circle at 83% 45%, rgba(107, 99, 87, 0.16) 0%, transparent 0.8%),
+                radial-gradient(circle at 25% 58%, rgba(107, 99, 87, 0.14) 0%, transparent 0.7%),
+                radial-gradient(circle at 91% 67%, rgba(107, 99, 87, 0.17) 0%, transparent 0.9%),
+                radial-gradient(circle at 38% 72%, rgba(107, 99, 87, 0.13) 0%, transparent 0.6%),
+                radial-gradient(circle at 72% 85%, rgba(107, 99, 87, 0.15) 0%, transparent 0.8%),
+                radial-gradient(circle at 12% 88%, rgba(107, 99, 87, 0.16) 0%, transparent 0.7%),
+                radial-gradient(circle at 55% 12%, rgba(107, 99, 87, 0.14) 0%, transparent 0.6%),
+                radial-gradient(circle at 8% 41%, rgba(107, 99, 87, 0.15) 0%, transparent 0.7%),
+                radial-gradient(circle at 47% 93%, rgba(107, 99, 87, 0.17) 0%, transparent 0.8%),
+                radial-gradient(circle at 88% 8%, rgba(107, 99, 87, 0.13) 0%, transparent 0.6%),
+                radial-gradient(circle at 33% 48%, rgba(107, 99, 87, 0.14) 0%, transparent 0.7%),
+                radial-gradient(circle at 62% 55%, rgba(107, 99, 87, 0.16) 0%, transparent 0.8%),
+                radial-gradient(circle at 77% 22%, rgba(107, 99, 87, 0.12) 0%, transparent 0.5%),
+                radial-gradient(circle at 19% 65%, rgba(107, 99, 87, 0.15) 0%, transparent 0.7%),
+                radial-gradient(circle at 51% 38%, rgba(107, 99, 87, 0.13) 0%, transparent 0.6%),
+                radial-gradient(circle at 94% 52%, rgba(107, 99, 87, 0.16) 0%, transparent 0.8%),
+                radial-gradient(circle at 29% 8%, rgba(107, 99, 87, 0.14) 0%, transparent 0.7%),
+                radial-gradient(circle at 65% 78%, rgba(107, 99, 87, 0.12) 0%, transparent 0.6%),
+                radial-gradient(circle at 6% 15%, rgba(107, 99, 87, 0.15) 0%, transparent 0.7%),
+                radial-gradient(circle at 44% 62%, rgba(107, 99, 87, 0.13) 0%, transparent 0.6%),
+                radial-gradient(circle at 81% 94%, rgba(107, 99, 87, 0.16) 0%, transparent 0.8%);
+            pointer-events: none;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .writing-popup > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .writing-popup.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 53, 48, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1999;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .popup-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-secondary);
+        }
+
+        .popup-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+
+        .popup-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .popup-title {
+            font-family: 'Tiempos Text', Georgia, serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .popup-date {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .popup-content {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .popup-content p {
+            margin-bottom: 20px;
+        }
+
+        .popup-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 640px) {
+            .writing-popup {
+                width: 92%;
+                padding: 36px 28px;
+                max-height: 80vh;
+            }
+
+            .popup-title {
+                font-size: 24px;
+            }
+
+            .popup-content {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Main content -->
+    <h1>Vicky Kuang</h1>
+    <div class="subtitle">university of toronto (2029)</div>
+
+    <div class="section">
+        <div class="section-title">currently</div>
+        <ul>
+            <li>a first year undergrad at the univeristy of toronto</li>
+            <li>mentored by PhD Candidate Abigail McGrory (Biostatistics)</li>
+            <li>local advocate for HIV/AIDS awareness</li>
+            <li>interested in biotechnology, computational modelling, and transhumanism</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">projects underway</div>
+        <ul>
+            <li>ThoughtBank</li>
+            <li>Predicting Leishmaniasis Outbreaks using HIV-Sentinel Surveilance</li>
+            <li>Finding your true personality</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">writing</div>
+        <ul>
+            <li><a href="#" data-essay="simplicity">on the future</a></li>
+            <li><a href="#" data-essay="prototyping">on Bryan Johnson & the longevity craze</a></li>
+            <li><a href="#" data-essay="reading">"biohacking" and the era of self-experimentation</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">contact & more</div>
+        <ul>
+            <li><a href="/cdn-cgi/l/email-protection#8ff9e6ece4f6a1e4faeee1e8cfe2eee6e3a1fafbe0fde0e1fbe0a1ecee" id="emailLink"><span class="__cf_email__" data-cfemail="0c7a656f67752267796d626b4c616d6560227978637e63627863226f6d">[email&#160;protected]</span></a></li>
+             <li><a href="https://github.com/pixelatedk">github</a></li>
+            <li><a href="https://vsco.co/vckykuang/gallery">photos</a></li>
+        </ul>
+    </div>
+
+    <!-- Floating action buttons -->
+    <div class="floating-actions">
+        <button class="action-btn theme" id="themeToggle" aria-label="Toggle theme">
+            <div class="theme-indicator"></div>
+            <span class="tooltip">Toggle theme</span>
+        </button>
+        
+        <button class="action-btn" id="scrollTop" aria-label="Scroll to top">
+            <svg viewBox="0 0 24 24">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+            <span class="tooltip">Back to top</span>
+        </button>
+
+        <button class="action-btn" id="copyEmail" aria-label="Copy email">
+            <svg viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="tooltip">Copy email</span>
+        </button>
+    </div>
+
+    <!-- Email copied notification -->
+    <div class="email-copied" id="emailCopied">email copied!</div>
+
+    <!-- Writing popup overlay -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    
+    <!-- Writing popup -->
+    <div class="writing-popup" id="writingPopup">
+        <button class="popup-close" id="popupClose" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="popup-title" id="popupTitle"></div>
+        <div class="popup-date" id="popupDate"></div>
+        <div class="popup-content" id="popupContent"></div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Scroll to top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Copy email to clipboard
+        const copyEmailBtn = document.getElementById('copyEmail');
+        const emailCopied = document.getElementById('emailCopied');
+
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                
+                const email = 'vicky.kuang@mail.utoronto.ca';
+                
+                try {
+                    // Try modern clipboard API first
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(email);
+                        emailCopied.classList.add('show');
+                        setTimeout(() => {
+                            emailCopied.classList.remove('show');
+                        }, 2000);
+                    } else {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = email;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        emailCopied.classList.add('show');
+                        setTimeout(() => {
+                            emailCopied.classList.remove('show');
+                        }, 2000);
+                    }
+                } catch (err) {
+                    console.error('Failed to copy email:', err);
+                    // Try fallback method on error
+                    try {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = email;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        emailCopied.classList.add('show');
+                        setTimeout(() => {
+                            emailCopied.classList.remove('show');
+                        }, 2000);
+                    } catch (fallbackErr) {
+                        console.error('Fallback copy failed:', fallbackErr);
+                    }
+                }
+                
+                return false;
+            });
+        }
+
+        // Reading progress bar
+        const progressBar = document.getElementById('progressBar');
+        
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Writing popup functionality
+        const essays = {
+            simplicity: {
+                title: 'on the future',
+                date: 'January 2026',
+                content: `
+                    <p>Simplicity isn't about removing features until there's nothing left. It's about understanding what matters and letting everything else fade away.</p>
+                    
+                    <p>The best interfaces feel invisible. You don't think about them—you think through them. They become extensions of your intent, not obstacles to overcome.</p>
+                    
+                    <p>This kind of simplicity is hard. It requires taste, restraint, and the courage to say no to good ideas in service of great ones. Every addition must justify its existence. Every element must pull its weight.</p>
+                    
+                    <p>When you get it right, people don't notice the design. They notice how easy it was to do what they wanted. That's the goal.</p>
+                `
+            },
+            prototyping: {
+                title: 'on Bryan Johnson & the longevity craze',
+                date: 'January 2026',
+                content: `
+                    <p>The fastest way to learn something is to build it badly, then rebuild it well.</p>
+                    
+                    <p>Prototypes should be disposable. If you're afraid to throw away code, you've already invested too much. The point is to explore the problem space, not to write production software.</p>
+                    
+                    <p>Start with the hardest part. If there's a technical risk or an interaction that feels uncertain, build that first. Everything else can wait.</p>
+                    
+                    <p>Some of my best work started as terrible first drafts. The key is shipping the second version, not perfecting the first.</p>
+                `
+            },
+            reading: {
+                title: "biohacking & the era of self-experimentation",
+                date: 'January 2026',
+                content: `
+                    <p>A running list of books, essays, and ideas that have stuck with me recently.</p>
+                    
+                    <p><em>The Timeless Way of Building</em> by Christopher Alexander—about patterns, quality, and the nature of good design. Dense but rewarding.</p>
+                    
+                    <p>Paul Graham's essays, especially the ones about taste and keeping your identity small. Clear thinking is rare.</p>
+                    
+                    <p><em>Thinking in Systems</em> by Donella Meadows—changed how I see feedback loops and leverage points. Essential for anyone building complex things.</p>
+                    
+                    <p>Always looking for recommendations. What should I read next?</p>
+                `
+            }
+        };
+
+        const popup = document.getElementById('writingPopup');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupClose = document.getElementById('popupClose');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDate = document.getElementById('popupDate');
+        const popupContent = document.getElementById('popupContent');
+
+        // Open popup
+        document.querySelectorAll('[data-essay]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const essayId = link.getAttribute('data-essay');
+                const essay = essays[essayId];
+                
+                if (essay) {
+                    popupTitle.textContent = essay.title;
+                    popupDate.textContent = essay.date;
+                    popupContent.innerHTML = essay.content;
+                    
+                    popupOverlay.classList.add('active');
+                    popup.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close popup
+        function closePopup() {
+            popupOverlay.classList.remove('active');
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        popupClose.addEventListener('click', closePopup);
+        popupOverlay.addEventL
