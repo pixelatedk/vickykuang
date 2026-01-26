@@ -181,15 +181,19 @@
         updateTime();
         setInterval(updateTime, 60000);
 
-        // Smooth page transition
+        // Smooth page transition (FIXED to use the real href)
         const enterLink = document.querySelector('.enter-link');
         enterLink.addEventListener('click', function(e) {
             e.preventDefault();
             document.body.classList.add('exiting');
+
+            const targetUrl = enterLink.getAttribute('href');
+
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = targetUrl;
             }, 600);
         });
     </script>
 </body>
 </html>
+
