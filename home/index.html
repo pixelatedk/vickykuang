@@ -600,7 +600,7 @@
     <div class="section">
         <div class="section-title">contact & more</div>
         <ul>
-            <li><a href="/cdn-cgi/l/email-protection#8ff9e6ece4f6a1e4faeee1e8cfe2eee6e3a1fafbe0fde0e1fbe0a1ecee" id="emailLink"><span class="__cf_email__" data-cfemail="0c7a656f67752267796d626b4c616d6560227978637e63627863226f6d">[email&#160;protected]</span></a></li>
+            <li><a href="mailto:vicky.kuang@mail.utoronto.ca" id="emailLink">vicky.kuang@mail.utoronto.ca</a></li>
              <li><a href="https://github.com/pixelatedk">github</a></li>
             <li><a href="https://vsco.co/vckykuang/gallery">photos</a></li>
         </ul>
@@ -822,4 +822,14 @@
         }
 
         popupClose.addEventListener('click', closePopup);
-        popupOverlay.addEventL
+        popupOverlay.addEventListener('click', closePopup);
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.classList.contains('active')) {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>
