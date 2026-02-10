@@ -557,6 +557,15 @@
             margin-bottom: 0;
         }
 
+        .popup-content a {
+            color: #3A3530;
+            border-bottom: 1px solid #B8E8D8;
+        }
+
+        .popup-content a:hover {
+            color: #9DD9C9;
+        }
+
         @media (max-width: 640px) {
             .writing-popup {
                 width: 92%;
@@ -585,7 +594,7 @@
     <div class="section">
         <div class="section-title">currently</div>
         <ul>
-            <li>a first year at the of univeristy of toronto (2029)</li>
+            <li>a first year at the of university of toronto (2029)</li>
             <li>mentored by PhD Candidate Abigail McGrory (Biostatistics)</li>
             <li>a local advocate for HIV/AIDS awareness </li>
         </ul>
@@ -602,9 +611,7 @@
     <div class="section">
         <div class="section-title">writing</div>
         <ul>
-            <li><a href="#" data-essay="simplicity">on advocacy</a></li>
-            <li><a href="#" data-essay="prototyping">on Bryan Johnson & the longevity craze</a></li>
-            <li><a href="#" data-essay="reading">"biohacking" and the era of self-experimentation</a></li>
+            <li><a href="#" data-essay="things">things i notice i keep turning back to, in no particular order</a></li>
         </ul>
     </div>
 
@@ -756,45 +763,25 @@
 
         // Writing popup functionality
         const essays = {
-            simplicity: {
-                title: 'on advocacy',
-                date: 'January 2026',
+            things: {
+                title: 'things i notice i keep turning back to, in no particular order',
+                date: 'February 2026',
                 content: `
-                    <p>Simplicity isn't about removing features until there's nothing left. It's about understanding what matters and letting everything else fade away.</p>
+                    <p><a href="https://www.askell.blog/the-virtues-and-vices-of-shark-curiosity/" target="_blank">The Virtues and Vices of Shark Curiosity</a> — Amanda Askell</p>
                     
-                    <p>The best interfaces feel invisible. You don't think about them—you think through them. They become extensions of your intent, not obstacles to overcome.</p>
+                    <p><em>Hedda Gabler</em> — Henrik Ibsen</p>
                     
-                    <p>This kind of simplicity is hard. It requires taste, restraint, and the courage to say no to good ideas in service of great ones. Every addition must justify its existence. Every element must pull its weight.</p>
+                    <p><a href="https://www.sherryning.com/p/how-lucky-are-you-allowed-to-get" target="_blank">How lucky are you allowed to get?</a> — Sherry Ning</p>
                     
-                    <p>When you get it right, people don't notice the design. They notice how easy it was to do what they wanted. That's the goal.</p>
-                `
-            },
-            prototyping: {
-                title: 'on Bryan Johnson & the longevity craze',
-                date: 'January 2026',
-                content: `
-                    <p>The fastest way to learn something is to build it badly, then rebuild it well.</p>
+                    <p><a href="https://www.bloomberg.com/opinion/newsletters/2026-01-05/everybody-wants-some-ai-debt" target="_blank">Everybody Wants Some AI Debt</a> — Matt Levine</p>
                     
-                    <p>Prototypes should be disposable. If you're afraid to throw away code, you've already invested too much. The point is to explore the problem space, not to write production software.</p>
+                    <p>"Caroline Shut Up" — Caroline Polachek</p>
                     
-                    <p>Start with the hardest part. If there's a technical risk or an interaction that feels uncertain, build that first. Everything else can wait.</p>
+                    <p><em>Consider the Lobster</em> — David Foster Wallace</p>
                     
-                    <p>Some of my best work started as terrible first drafts. The key is shipping the second version, not perfecting the first.</p>
-                `
-            },
-            reading: {
-                title: "biohacking & the era of self-experimentation",
-                date: 'January 2026',
-                content: `
-                    <p>A running list of books, essays, and ideas that have stuck with me recently.</p>
+                    <p>"PROVENZA" — KAROL G</p>
                     
-                    <p><em>The Timeless Way of Building</em> by Christopher Alexander—about patterns, quality, and the nature of good design. Dense but rewarding.</p>
-                    
-                    <p>Paul Graham's essays, especially the ones about taste and keeping your identity small. Clear thinking is rare.</p>
-                    
-                    <p><em>Thinking in Systems</em> by Donella Meadows—changed how I see feedback loops and leverage points. Essential for anyone building complex things.</p>
-                    
-                    <p>Always looking for recommendations. What should I read next?</p>
+                    <p><em>For Art, For Life: The Epistolary Novel of Vincent van Gogh</em></p>
                 `
             }
         };
